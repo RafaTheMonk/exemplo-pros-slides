@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoScore B2B — Pitch Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #080C10;
+    --surface: #0D1117;
+    --card: #161B22;
+    --border: #21262D;
+    --border-green: rgba(0, 210, 90, 0.3);
+    --green: #00D25A;
+    --green-dim: rgba(0, 210, 90, 0.12);
+    --green-glow: rgba(0, 210, 90, 0.06);
+    --text: #F0F6FC;
+    --muted: #8B949E;
+    --dim: #484F58;
+    --red: #E24B4A;
+    --font: 'Space Grotesk', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(8,12,16,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px;
+  }
+  .nav-logo { font-size: 14px; font-weight: 600; color: var(--green); letter-spacing: 0.05em; }
+  .nav-dots { display: flex; gap: 6px; }
+  .nav-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--border); cursor: pointer; transition: background 0.2s;
+  }
+  .nav-dot.active { background: var(--green); }
+  .nav-counter { font-family: var(--mono); font-size: 12px; color: var(--dim); }
+
+  /* SLIDES */
+  .slides-wrap { padding-top: 52px; }
+
+  section {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 60px 80px;
+    border-bottom: 0.5px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  section::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse 60% 50% at 80% 20%, var(--green-glow), transparent);
+    pointer-events: none;
+  }
+
+  .slide-num {
+    font-family: var(--mono);
+    font-size: 11px; color: var(--dim);
+    margin-bottom: 16px;
+    letter-spacing: 0.1em;
+  }
+
+  .slide-label {
+    font-size: 11px; font-weight: 500;
+    color: var(--green);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; line-height: 1.1; }
+  h2 { font-size: clamp(24px, 3.5vw, 38px); font-weight: 600; line-height: 1.2; }
+  .green { color: var(--green); }
+
+  .tagline {
+    font-size: 18px; color: var(--muted);
+    margin-top: 12px; margin-bottom: 32px;
+    max-width: 520px;
+  }
+
+  .badges { display: flex; gap: 10px; flex-wrap: wrap; }
+  .badge {
+    font-size: 12px; font-weight: 500;
+    color: var(--green);
+    background: var(--green-dim);
+    border: 0.5px solid var(--border-green);
+    padding: 6px 14px; border-radius: 20px;
+  }
+
+  /* CARDS */
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 28px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-top: 28px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-top: 20px; }
+
+  .card {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .card.accent { border-color: var(--border-green); background: rgba(0,210,90,0.04); }
+
+  .card-icon { font-size: 20px; margin-bottom: 10px; }
+  .card-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .card-text { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  .icon-red { color: var(--red); }
+  .icon-green { color: var(--green); }
+
+  /* DOR cards */
+  .dor-num {
+    font-family: var(--mono);
+    font-size: 11px; color: var(--red);
+    margin-bottom: 10px; letter-spacing: 0.08em;
+  }
+
+  /* FLOW */
+  .flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 0; align-items: center;
+    margin-top: 32px;
+  }
+  .flow-step {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 14px;
+    text-align: center;
+  }
+  .flow-step-num {
+    font-size: 28px; font-weight: 700;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .flow-step-text { font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .flow-arrow {
+    color: var(--border);
+    font-size: 18px;
+    padding: 0 8px;
+    text-align: center;
+  }
+
+  /* TECH TAGS */
+  .tech-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+  .tech-tag {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 12px; color: var(--muted);
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .tech-tag strong { font-size: 11px; color: var(--green); font-weight: 500; }
+
+  /* DIFF TABLE */
+  .diff-header {
+    font-size: 13px; font-weight: 600;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .diff-item {
+    display: flex; gap: 10px;
+    font-size: 13px; color: var(--muted);
+    margin-bottom: 10px; align-items: flex-start; line-height: 1.4;
+  }
+  .diff-check { color: var(--green); flex-shrink: 0; font-size: 15px; margin-top: 1px; }
+  .diff-cross { color: var(--red); flex-shrink: 0; font-size: 15px; margin-top: 1px; }
+
+  /* MARKET */
+  .market-num { font-size: 32px; font-weight: 700; color: var(--green); margin-bottom: 4px; }
+  .market-label { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+  .market-sub { font-size: 13px; color: var(--text); }
+
+  /* GAUGE */
+  .gauge-wrap { text-align: center; padding: 12px 0; }
+  .gauge-num { font-size: 48px; font-weight: 700; color: var(--green); line-height: 1; }
+  .gauge-label { font-size: 12px; color: var(--muted); margin: 6px 0 10px; }
+  .gauge-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .gauge-fill { height: 100%; border-radius: 3px; background: var(--green); transition: width 1s ease; }
+
+  /* DEMO SCREEN */
+  .demo-screen {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .demo-titlebar {
+    background: var(--surface);
+    border-bottom: 0.5px solid var(--border);
+    padding: 10px 14px;
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; color: var(--muted);
+  }
+  .dot-r { width: 8px; height: 8px; border-radius: 50%; background: #E24B4A; display: inline-block; }
+  .dot-y { width: 8px; height: 8px; border-radius: 50%; background: #EF9F27; display: inline-block; }
+  .dot-g { width: 8px; height: 8px; border-radius: 50%; background: #00D25A; display: inline-block; }
+  .demo-body { padding: 16px; }
+
+  /* IMPACT */
+  .impact-num { font-size: 28px; font-weight: 700; color: var(--green); }
+  .impact-desc { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+  /* ROADMAP */
+  .road-title { font-size: 11px; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .road-item {
+    display: flex; gap: 10px;
+    font-size: 13px; color: var(--text);
+    margin-bottom: 10px; align-items: flex-start; line-height: 1.4;
+  }
+  .road-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); margin-top: 6px; flex-shrink: 0; }
+
+  /* ASK BOX */
+  .ask-box {
+    background: rgba(0,210,90,0.06);
+    border: 0.5px solid var(--border-green);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-top: 20px;
+    font-size: 15px; color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* TEAM */
+  .team-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--green-dim);
+    border: 0.5px solid var(--border-green);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 600; color: var(--green);
+    margin: 0 auto 10px;
+  }
+
+  /* METRIC MINI */
+  .metric-mini {
+    background: var(--surface);
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+  }
+  .metric-mini-val { font-size: 15px; font-weight: 600; color: var(--green); }
+  .metric-mini-label { font-size: 10px; color: var(--muted); margin-top: 3px; }
+
+  /* FOOTER NOTE */
+  .note { font-size: 13px; color: var(--muted); margin-top: 18px; line-height: 1.6; }
+
+  /* PRINT HINT */
+  @media print {
+    nav { display: none; }
+    section { min-height: 100vh; page-break-after: always; }
+  }
+
+  /* SCROLL FADE IN */
+  .fade-in {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  /* SLIDE 1 SPECIAL */
+  #s1 { justify-content: center; min-height: 100vh; }
+  #s1 h1 { font-size: clamp(44px, 6vw, 72px); }
+  #s1 .underline-green {
+    display: inline-block;
+    border-bottom: 3px solid var(--green);
+    padding-bottom: 2px;
+  }
+
+  /* FORM MOCK */
+  .form-row {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px; color: var(--muted);
+    margin-bottom: 8px;
+    display: flex; justify-content: space-between;
+  }
+  .form-val { color: var(--text); font-weight: 500; }
+  .btn-green {
+    background: var(--green);
+    color: #080C10;
+    font-size: 13px; font-weight: 600;
+    padding: 10px 0; border-radius: 6px;
+    text-align: center; margin-top: 12px;
+    cursor: pointer;
+  }
+
+  /* GRID MINI */
+  .grid-mini-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">ECOSCORE B2B</span>
+  <div class="nav-dots" id="navDots"></div>
+  <span class="nav-counter" id="navCounter">01 / 10</span>
+</nav>
+
+<div class="slides-wrap">
+
+  <!-- SLIDE 1 -->
+  <section id="s1">
+    <div class="slide-num">01 / 10</div>
+    <div class="slide-label">Ideathon Energy Summit 2026</div>
+    <h1>Eco<span class="green">Score</span><br><span class="underline-green">B2B</span></h1>
+    <p class="tagline">A conta de luz do hotel vira score ESG com inteligência artificial</p>
+    <div class="badges">
+      <span class="badge">100% Software</span>
+      <span class="badge">Sem hardware</span>
+      <span class="badge">Já está no ar</span>
+      <span class="badge">Setor hoteleiro</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 -->
+  <section id="s2">
+    <div class="slide-num">02 / 10</div>
+    <div class="slide-label">O problema</div>
+    <h2>Hotéis voam<br>às <span class="green">cegas</span></h2>
+    <div class="grid-3">
+      <div class="card">
+        <div class="dor-num">DOR 01</div>
+        <div class="card-title">Paga às cegas</div>
+        <div class="card-text">Contas de energia altíssimas sem nenhuma visibilidade de onde está o desperdício. Paga todo mês. Sem dados para agir.</div>
+      </div>
+      <div class="card">
+        <div class="dor-num">DOR 02</div>
+        <div class="card-title">Perdendo reservas</div>
+        <div class="card-text">Booking.com já destaca selos ESG nas buscas. Sem comprovação de sustentabilidade, o hotel perde visibilidade e contratos.</div>
+      </div>
+      <div class="card">
+        <div class="dor-num">DOR 03</div>
+        <div class="card-title">Feito para os grandes</div>
+        <div class="card-text">Auditorias energéticas exigem hardware caro ou consultorias complexas. O hotel de médio porte fica de fora da economia verde.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 -->
+  <section id="s3">
+    <div class="slide-num">03 / 10</div>
+    <div class="slide-label">A solução</div>
+    <h2>Inventário + conta de luz<br>= <span class="green">EcoScore</span></h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-icon icon-green">◎</div>
+        <div class="card-title">Score de 0 a 100</div>
+        <div class="card-text">Diagnóstico imediato da eficiência energética do hotel. Gerado em segundos pela IA.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-green">R$</div>
+        <div class="card-title">Economia em reais</div>
+        <div class="card-text">Projeção real de quanto o hotel pode economizar por mês, por equipamento.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-green">▶</div>
+        <div class="card-title">Plano de ação por IA</div>
+        <div class="card-text">Sugestões priorizadas por retorno financeiro e impacto ambiental. Acionável imediatamente.</div>
+      </div>
+      <div class="card accent">
+        <div class="card-icon icon-green">✦</div>
+        <div class="card-title">Relatório ESG automático</div>
+        <div class="card-text">PDF exportável para Booking.com, certificações e contratos corporativos. Gerado com 1 clique.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4 -->
+  <section id="s4">
+    <div class="slide-num">04 / 10</div>
+    <div class="slide-label">Demo real — não é mockup</div>
+    <h2>O produto está <span class="green">no ar agora</span></h2>
+    <div class="grid-2">
+      <div class="demo-screen">
+        <div class="demo-titlebar">
+          <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
+          &nbsp; Cadastro do hotel
+        </div>
+        <div class="demo-body">
+          <div class="form-row">Quartos <span class="form-val">60</span></div>
+          <div class="form-row">Ocupação <span class="form-val">75%</span></div>
+          <div class="form-row">Ar-condicionado <span class="form-val">12.000 BTU</span></div>
+          <div class="form-row">Frigobar <span class="form-val">Padrão</span></div>
+          <div class="form-row">Consumo do mês <span class="form-val">18.500 kWh</span></div>
+          <div class="form-row">Valor da conta <span class="form-val">R$ 12.800</span></div>
+          <div class="btn-green">Analisar com IA →</div>
+        </div>
+      </div>
+      <div class="demo-screen">
+        <div class="demo-titlebar">
+          <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
+          &nbsp; Dashboard — resultado
+        </div>
+        <div class="demo-body">
+          <div class="gauge-wrap">
+            <div class="gauge-num">74</div>
+            <div class="gauge-label">EcoScore — Na média do setor</div>
+            <div class="gauge-bar"><div class="gauge-fill" style="width:74%"></div></div>
+          </div>
+          <div class="grid-mini-2">
+            <div class="metric-mini">
+              <div class="metric-mini-val">R$ 2.400</div>
+              <div class="metric-mini-label">economia/mês</div>
+            </div>
+            <div class="metric-mini">
+              <div class="metric-mini-val">15 ton</div>
+              <div class="metric-mini-label">CO₂ evitável/ano</div>
+            </div>
+          </div>
+          <div style="margin-top:12px;">
+            <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">Plano de ação</div>
+            <div style="font-size:12px;color:var(--text);background:var(--surface);border-radius:6px;padding:10px;line-height:1.5;">⚡ Manutenção preventiva nos frigobares do andar 2 pode economizar R$ 900/mês</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5 -->
+  <section id="s5">
+    <div class="slide-num">05 / 10</div>
+    <div class="slide-label">Como funciona</div>
+    <h2>4 passos.<br><span class="green">Segundos</span> de resposta.</h2>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-step-num">1</div>
+        <div class="flow-step-text">Cadastro do inventário do hotel</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-step-num">2</div>
+        <div class="flow-step-text">Upload da conta de luz mensal</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-step-num">3</div>
+        <div class="flow-step-text">IA audita e cruza com benchmark regional</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-step-num">4</div>
+        <div class="flow-step-text">Score + plano de ação + relatório ESG</div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <div class="tech-tag"><strong>IA auditora</strong>Claude (Anthropic)</div>
+      <div class="tech-tag"><strong>Clima histórico</strong>Open-Meteo</div>
+      <div class="tech-tag"><strong>Previsão</strong>OpenWeather</div>
+      <div class="tech-tag"><strong>Benchmarks</strong>BR por região</div>
+      <div class="tech-tag"><strong>Deploy</strong>Serverless / Vercel</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6 -->
+  <section id="s6">
+    <div class="slide-num">06 / 10</div>
+    <div class="slide-label">Nosso diferencial</div>
+    <h2>IA auditora vs.<br><span class="green">planilha</span></h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="diff-header" style="color:var(--red);">✕ Planilha tradicional</div>
+        <div class="diff-item"><span class="diff-cross">✕</span>Não ajusta benchmark pelo clima da região</div>
+        <div class="diff-item"><span class="diff-cross">✕</span>Não interpreta o contexto do hotel</div>
+        <div class="diff-item"><span class="diff-cross">✕</span>Não prioriza ação por retorno financeiro</div>
+        <div class="diff-item"><span class="diff-cross">✕</span>Não gera relatório ESG pronto para uso</div>
+        <div class="diff-item"><span class="diff-cross">✕</span>Entrada manual complexa e propensa a erros</div>
+      </div>
+      <div class="card accent">
+        <div class="diff-header" style="color:var(--green);">✓ EcoScore B2B</div>
+        <div class="diff-item"><span class="diff-check">✓</span>Benchmark ajustado por clima e região</div>
+        <div class="diff-item"><span class="diff-check">✓</span>Auditoria contextual inteligente do hotel</div>
+        <div class="diff-item"><span class="diff-check">✓</span>Plano de ação priorizado por R$ de retorno</div>
+        <div class="diff-item"><span class="diff-check">✓</span>Relatório ESG exportável PDF + WhatsApp</div>
+        <div class="diff-item"><span class="diff-check">✓</span>Processo automatizado em segundos</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7 -->
+  <section id="s7">
+    <div class="slide-num">07 / 10</div>
+    <div class="slide-label">Mercado</div>
+    <h2>30 mil hotéis.<br>Sem ferramenta <span class="green">acessível</span>.</h2>
+    <div class="grid-3">
+      <div class="card">
+        <div class="market-num">+30k</div>
+        <div class="market-label">TAM — Total disponível</div>
+        <div class="market-sub">Meios de hospedagem no Brasil (Cadastur)</div>
+      </div>
+      <div class="card accent">
+        <div class="market-num">~8k</div>
+        <div class="market-label">SAM — Nosso foco</div>
+        <div class="market-sub">Hotéis de 20 a 100 quartos no Brasil</div>
+      </div>
+      <div class="card">
+        <div class="market-num">50</div>
+        <div class="market-label">SOM — Meta ano 1</div>
+        <div class="market-sub">Clientes ativos em 12 meses</div>
+      </div>
+    </div>
+    <p class="note">Gatilho de venda: busca urgente por selos ESG nas OTAs (Booking, Airbnb) para manter visibilidade nas buscas. O efeito multiplicador da padronização dos quartos amplifica a economia para toda a rede.</p>
+  </section>
+
+  <!-- SLIDE 8 -->
+  <section id="s8">
+    <div class="slide-num">08 / 10</div>
+    <div class="slide-label">Modelo de negócio</div>
+    <h2>SaaS mensal.<br>Margem <span class="green">previsível</span>.</h2>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">Plano básico</div>
+        <div class="card-text" style="margin-top:8px;">Até 20 quartos<br>Pousadas e hotéis boutique</div>
+      </div>
+      <div class="card accent">
+        <div class="card-title">Plano intermediário</div>
+        <div class="card-text" style="margin-top:8px;">21 a 100 quartos<br>Hotéis de médio porte</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Enterprise</div>
+        <div class="card-text" style="margin-top:8px;">100+ quartos<br>Redes hoteleiras</div>
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top:14px;">
+      <div class="card">
+        <div class="card-title" style="font-size:13px;">Custo variável</div>
+        <div class="card-text" style="color:var(--green);font-weight:500;margin-top:4px;">Escala com a receita</div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="font-size:13px;">Infra no MVP</div>
+        <div class="card-text" style="color:var(--green);font-weight:500;margin-top:4px;">Free tier — custo zero</div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="font-size:13px;">Margem</div>
+        <div class="card-text" style="color:var(--green);font-weight:500;margin-top:4px;">Altamente previsível</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 9 -->
+  <section id="s9">
+    <div class="slide-num">09 / 10</div>
+    <div class="slide-label">Impacto real e mensurável</div>
+    <h2>O app já calcula<br>o <span class="green">CO₂ evitável</span></h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="impact-num">15 ton</div>
+        <div class="impact-desc">CO₂ evitável por hotel que reduz 10% do consumo — calculado automaticamente no app</div>
+      </div>
+      <div class="card accent">
+        <div class="impact-num">750 ton</div>
+        <div class="impact-desc">CO₂ evitado com 50 hotéis na plataforma por ano</div>
+      </div>
+      <div class="card">
+        <div class="impact-num">150 carros</div>
+        <div class="impact-desc">Equivalente a tirar 150 veículos das ruas por 1 ano inteiro</div>
+      </div>
+      <div class="card">
+        <div class="impact-num">Fase 2</div>
+        <div class="impact-desc">Expansão para condomínios, clínicas e comércios locais — mesma arquitetura, novo segmento</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 10 -->
+  <section id="s10">
+    <div class="slide-num">10 / 10</div>
+    <div class="slide-label">Roadmap, equipe e pedido</div>
+    <h2>Somos engenheiros<br>que <span class="green">entregam</span></h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="road-title">Onde estamos</div>
+        <div class="road-item"><span class="road-dot"></span>MVP funcional construído e no ar</div>
+        <div class="road-item"><span class="road-dot"></span>Produto entregue dentro do prazo do Ideathon</div>
+        <div class="road-title" style="margin-top:16px;">Próximos 12 meses</div>
+        <div class="road-item"><span class="road-dot"></span>Piloto com 5 hotéis parceiros</div>
+        <div class="road-item"><span class="road-dot"></span>Lançamento comercial</div>
+        <div class="road-item"><span class="road-dot"></span>Meta: 50 clientes ativos</div>
+        <div class="road-item"><span class="road-dot"></span>R$ 2 milhões em economia gerada</div>
+      </div>
+      <div class="card">
+        <div class="road-title">A equipe</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:0;">
+          <div style="text-align:center;">
+            <div class="team-avatar">RB</div>
+            <div style="font-size:13px;font-weight:600;">Rafael</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">Dev + IA</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="team-avatar" style="background:rgba(55,138,221,0.12);border-color:rgba(55,138,221,0.3);color:#378ADD;">M2</div>
+            <div style="font-size:13px;font-weight:600;">Membro 2</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">Negócios</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;font-size:12px;color:var(--muted);line-height:1.6;">Engenheiros de software com experiência em IA aplicada e projetos premiados em hackathons.</div>
+      </div>
+    </div>
+    <div class="ask-box">
+      Buscamos <strong style="color:var(--green);">5 hotéis parceiros</strong> para o piloto gratuito nos próximos 60 dias. Com o prêmio do Ideathon, chegamos a <strong style="color:var(--green);">50 clientes e R$ 2 milhões</strong> em economia gerada em 12 meses. Aquele hotel que pagava às cegas — com o EcoScore B2B, ele finalmente sabe o que fazer.
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const sections = document.querySelectorAll('section');
+  const navDots = document.getElementById('navDots');
+  const navCounter = document.getElementById('navCounter');
+
+  sections.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => sections[i].scrollIntoView({ behavior: 'smooth' });
+    navDots.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.nav-dot');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = Array.from(sections).indexOf(entry.target);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        navCounter.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(sections.length).padStart(2, '0');
+      }
+    });
+  }, { threshold: 0.5 });
+
+  sections.forEach(s => observer.observe(s));
+
+  const fadeEls = document.querySelectorAll('.card, .flow-step, .tech-tag, .impact-num, .market-num');
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  fadeEls.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(12px)';
+    el.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+    fadeObserver.observe(el);
+  });
+</script>
+</body>
+</html>
